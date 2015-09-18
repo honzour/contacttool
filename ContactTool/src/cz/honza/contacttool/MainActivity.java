@@ -30,7 +30,20 @@ public class MainActivity extends Activity {
 	
 	protected void rawContactsLogCat()
 	{
-		Toast.makeText(this, R.string.not_implemented, Toast.LENGTH_LONG).show();
+		final String[] projection = {ContactsContract.RawContacts._ID, ContactsContract.RawContacts.CONTACT_ID};
+		final Cursor c = getContentResolver().query(ContactsContract.RawContacts.CONTENT_URI, projection, null, null, ContactsContract.RawContacts.CONTACT_ID);
+		
+		Log.i("RawContacts", ContactsContract.RawContacts._ID + " / " + ContactsContract.RawContacts.CONTACT_ID);
+		
+		if (c != null && c.moveToFirst())
+		{
+			do
+			{
+				Log.i("RawContacts", c.getString(0) + " / " + c.getString(1));
+			} while (c.moveToNext());
+		}
+		else
+			Toast.makeText(this, R.string.no_result, Toast.LENGTH_LONG).show();
 	}
 	
 	protected void dataLogCat()
