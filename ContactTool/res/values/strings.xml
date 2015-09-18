@@ -1,5 +1,12 @@
 <resources>
 
     <string name="app_name">ContactTool</string>
-
+    <string name="cc_contacts">ContactsContract.Contacts</string>
+    <string name="cc_raw_contacts">ContactsContract.RawContacts</string>
+	<string name="cc_data">ContactsContract.Data</string>
+	
+	<string name="logcat">LogCat</string>
+	<string name="listview">ListView</string>
+	<string name="delete">Delete all</string>
+	
 </resources>
