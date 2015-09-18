@@ -1,10 +1,10 @@
 package cz.honza.contacttool;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -12,9 +12,20 @@ public class MainActivity extends Activity {
 	
 	protected void contactsLogCat()
 	{
-		//final String 
-		//final Cursor c = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, projection, selection, selectionArgs, sortOrder);
-		Toast.makeText(this, R.string.not_implemented, Toast.LENGTH_LONG).show();
+		final String[] projection = {ContactsContract.Contacts._ID, ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts.HAS_PHONE_NUMBER};
+		final Cursor c = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, projection, null, null, ContactsContract.Contacts._ID);
+		
+		Log.i("Contacts", ContactsContract.Contacts._ID + " / " + ContactsContract.Contacts.DISPLAY_NAME + " / " + ContactsContract.Contacts.HAS_PHONE_NUMBER);
+		
+		if (c != null && c.moveToFirst())
+		{
+			do
+			{
+				Log.i("Contacts", c.getString(0) + " / " + c.getString(1) + " / " + c.getString(2));
+			} while (c.moveToNext());
+		}
+		else
+			Toast.makeText(this, R.string.no_result, Toast.LENGTH_LONG).show();
 	}
 	
 	protected void rawContactsLogCat()
