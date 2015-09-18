@@ -226,12 +226,12 @@ public class MainActivity extends Activity {
 	
 	protected void rawContactsDelete()
 	{
-		Toast.makeText(this, R.string.not_implemented, Toast.LENGTH_LONG).show();
+		showDialog(DIALOG_DELETE_RAW_CONTACTS);
 	}
 	
 	protected void dataDelete()
 	{
-		Toast.makeText(this, R.string.not_implemented, Toast.LENGTH_LONG).show();
+		showDialog(DIALOG_DELETE_DATA);
 	}
 
 	@Override
@@ -321,7 +321,10 @@ public class MainActivity extends Activity {
 		switch (id)
 		{
 		case DIALOG_DELETE_CONTACTS:
+		{
 			AlertDialog.Builder b = new AlertDialog.Builder(this);
+			b.setTitle(R.string.delete_data);
+			b.setMessage(R.string.delete_all);
 			b.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -329,7 +332,7 @@ public class MainActivity extends Activity {
 					
 				}
 			});
-			b.setNegativeButton(R.string.yes, new DialogInterface.OnClickListener() {
+			b.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
@@ -337,12 +340,52 @@ public class MainActivity extends Activity {
 				}
 			});
 
-			b.create();
-			break;
+			return b.create();
+		}
 		case DIALOG_DELETE_RAW_CONTACTS:
-			break;
+		{
+			AlertDialog.Builder b = new AlertDialog.Builder(this);
+			b.setTitle(R.string.delete_data);
+			b.setMessage(R.string.delete_all);
+			b.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			b.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+
+			return b.create();
+		}
 		case DIALOG_DELETE_DATA:
-			break;
+		{
+			AlertDialog.Builder b = new AlertDialog.Builder(this);
+			b.setTitle(R.string.delete_data);
+			b.setMessage(R.string.delete_all);
+			b.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			b.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+
+			return b.create();
+		}
 		}
 		return super.onCreateDialog(id);
 	}

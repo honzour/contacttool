@@ -15,4 +15,10 @@
 	<string name="yes">Yes</string>
 	<string name="no">No</string>
 	
+	<string name="delete_contacts">Delete all contacts?</string>
+	<string name="delete_raw_contacts">Delete raw contacts?</string>
+	<string name="delete_data">Delete data?</string>
+	
+	<string name="delete_all">This will really delete the whole contact table!!!</string>
+	
 </resources>
