@@ -2,6 +2,7 @@ package cz.honza.contacttool;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -48,7 +49,152 @@ public class MainActivity extends Activity {
 	
 	protected void dataLogCat()
 	{
-		Toast.makeText(this, R.string.not_implemented, Toast.LENGTH_LONG).show();
+		final String[] projection = {ContactsContract.Data._ID, ContactsContract.Data.CONTACT_ID, ContactsContract.Data.RAW_CONTACT_ID, ContactsContract.Data.MIMETYPE,
+				ContactsContract.Data.DATA1, ContactsContract.Data.DATA2, ContactsContract.Data.DATA3, ContactsContract.Data.DATA4, ContactsContract.Data.DATA5,
+				ContactsContract.Data.DATA6, ContactsContract.Data.DATA7, ContactsContract.Data.DATA8, ContactsContract.Data.DATA9, ContactsContract.Data.DATA10,
+				ContactsContract.Data.DATA11, ContactsContract.Data.DATA12, ContactsContract.Data.DATA13, ContactsContract.Data.DATA14, ContactsContract.Data.DATA15
+		};
+		final Cursor c = getContentResolver().query(ContactsContract.Data.CONTENT_URI, projection, null, null, ContactsContract.Data.CONTACT_ID);
+		
+		Log.i("Data", ContactsContract.Data._ID + " / " + ContactsContract.Data.CONTACT_ID  + " / " +  ContactsContract.Data.RAW_CONTACT_ID  + " / " + ContactsContract.Data.MIMETYPE  + " / " +  
+				ContactsContract.Data.DATA1  + " / " +  ContactsContract.Data.DATA2  + " / " +  ContactsContract.Data.DATA3  + " / " +  ContactsContract.Data.DATA4 + " / " +  ContactsContract.Data.DATA5 + " / " + 
+				ContactsContract.Data.DATA6  + " / " +  ContactsContract.Data.DATA7  + " / " +  ContactsContract.Data.DATA8  + " / " +  ContactsContract.Data.DATA9 + " / " +  ContactsContract.Data.DATA10 + " / " + 
+				ContactsContract.Data.DATA11 + " / " +  ContactsContract.Data.DATA12 + " / " +  ContactsContract.Data.DATA13 + " / " +  ContactsContract.Data.DATA14 + " / " +  ContactsContract.Data.DATA15);
+		
+		if (c != null && c.moveToFirst())
+		{
+			do
+			{
+				String data1 = "blob";
+				String data2 = data1;
+				String data3 = data1;
+				String data4 = data1;
+				String data5 = data1;
+				String data6 = data1;
+				String data7 = data1;
+				String data8 = data1;
+				String data9 = data1;
+				String data10 = data1;
+				String data11 = data1;
+				String data12 = data1;
+				String data13 = data1;
+				String data14 = data1;
+				String data15 = data1;
+				
+				try {
+					data1 = c.getString(4);
+				}
+				catch (SQLiteException e)
+				{
+				}
+				
+				try {
+					data2 = c.getString(5);
+				}
+				catch (SQLiteException e)
+				{
+				}
+
+				try {
+					data3 = c.getString(6);
+				}
+				catch (SQLiteException e)
+				{
+				}
+
+				try {
+					data4 = c.getString(7);
+				}
+				catch (SQLiteException e)
+				{
+				}
+
+				try {
+					data5 = c.getString(8);
+				}
+				catch (SQLiteException e)
+				{
+				}
+
+				try {
+					data6 = c.getString(9);
+				}
+				catch (SQLiteException e)
+				{
+				}
+
+				try {
+					data7 = c.getString(10);
+				}
+				catch (SQLiteException e)
+				{
+				}
+
+				try {
+					data8 = c.getString(11);
+				}
+				catch (SQLiteException e)
+				{
+				}
+
+				try {
+					data9 = c.getString(12);
+				}
+				catch (SQLiteException e)
+				{
+				}
+
+				try {
+					data10 = c.getString(13);
+				}
+				catch (SQLiteException e)
+				{
+				}
+
+				try {
+					data11 = c.getString(14);
+				}
+				catch (SQLiteException e)
+				{
+				}
+
+				try {
+					data12 = c.getString(15);
+				}
+				catch (SQLiteException e)
+				{
+				}
+
+				try {
+					data13 = c.getString(16);
+				}
+				catch (SQLiteException e)
+				{
+				}
+
+				try {
+					data14 = c.getString(17);
+				}
+				catch (SQLiteException e)
+				{
+				}
+
+				try {
+					data15 = c.getString(18);
+				}
+				catch (SQLiteException e)
+				{
+				}
+
+				
+				Log.i("data", c.getString(0) + " / " + c.getString(1) + " / " + c.getString(2)  + " / " + c.getString(3)  + " / " + data1
+						 + " / " + data2 + " / " + data3 + " / " + data4 + " / " + data5 + " / " + data6
+						 + " / " + data7 + " / " + data8 + " / " + data9 + " / " + data10 + " / " + data11
+						 + " / " + data12 + " / " + data13 + " / " + data14 + " / " + data15);
+			} while (c.moveToNext());
+		}
+		else
+			Toast.makeText(this, R.string.no_result, Toast.LENGTH_LONG).show();
 	}
 	
 	protected void contactsListView()
