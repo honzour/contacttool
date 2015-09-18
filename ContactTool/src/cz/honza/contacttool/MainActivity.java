@@ -3,9 +3,11 @@ package cz.honza.contacttool;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -328,10 +330,18 @@ public class MainActivity extends Activity {
 			b.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					
+					ContentResolver contentResolver = getContentResolver();
+			        Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+			        while (cursor.moveToNext()) {
+			            String lookupKey = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.LOOKUP_KEY));
+			            Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_LOOKUP_URI, lookupKey);
+			            contentResolver.delete(uri, null, null);
+			        }
+			        
+			        Toast.makeText(MainActivity.this, "Deleted", Toast.LENGTH_LONG).show();
 				}
 			});
+			
 			b.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -350,15 +360,15 @@ public class MainActivity extends Activity {
 			b.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					
+					int rows = getContentResolver().delete(ContactsContract.RawContacts.CONTENT_URI, null, null);
+					Toast.makeText(MainActivity.this, rows + " rows deleted", Toast.LENGTH_LONG).show();
 				}
 			});
 			b.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					
+					int rows = getContentResolver().delete(ContactsContract.Data.CONTENT_URI, null, null);
+					Toast.makeText(MainActivity.this, rows + " rows deleted", Toast.LENGTH_LONG).show();					
 				}
 			});
 
