@@ -9,4 +9,6 @@
 	<string name="listview">ListView</string>
 	<string name="delete">Delete all</string>
 	
+	<string name="not_implemented">Not implemented</string>
+	
 </resources>
