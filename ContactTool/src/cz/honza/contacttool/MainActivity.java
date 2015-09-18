@@ -1,6 +1,9 @@
 package cz.honza.contacttool;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
@@ -10,6 +13,10 @@ import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+	
+	protected static final int DIALOG_DELETE_CONTACTS = 1000;
+	protected static final int DIALOG_DELETE_RAW_CONTACTS = DIALOG_DELETE_CONTACTS + 1;
+	protected static final int DIALOG_DELETE_DATA = DIALOG_DELETE_CONTACTS + 2;
 	
 	protected void contactsLogCat()
 	{
@@ -214,7 +221,7 @@ public class MainActivity extends Activity {
 	
 	protected void contactsDelete()
 	{
-		Toast.makeText(this, R.string.not_implemented, Toast.LENGTH_LONG).show();
+		showDialog(DIALOG_DELETE_CONTACTS);
 	}
 	
 	protected void rawContactsDelete()
@@ -309,4 +316,36 @@ public class MainActivity extends Activity {
 		});
 	}
 
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		switch (id)
+		{
+		case DIALOG_DELETE_CONTACTS:
+			AlertDialog.Builder b = new AlertDialog.Builder(this);
+			b.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			b.setNegativeButton(R.string.yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+
+			b.create();
+			break;
+		case DIALOG_DELETE_RAW_CONTACTS:
+			break;
+		case DIALOG_DELETE_DATA:
+			break;
+		}
+		return super.onCreateDialog(id);
+	}
+
+	
 }
