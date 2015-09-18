@@ -365,10 +365,9 @@ public class MainActivity extends Activity {
 			b.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					//ContactsContract.RawContacts.CONTENT_URI.buildUpon().appendQueryParameter(ContactsContract.CALLER_IS_SYNCADAPTER, "true").build();
 					int rows = getContentResolver().delete(
 							ContactsContract.RawContacts.CONTENT_URI.buildUpon().appendQueryParameter(ContactsContract.CALLER_IS_SYNCADAPTER, "true").build(),
-							 null, null/*ContactsContract.RawContacts._ID + " >= ?", new String[]{"0"}*/);
+							 null, null);
 					Toast.makeText(MainActivity.this, rows + " rows deleted", Toast.LENGTH_LONG).show();
 				}
 			});
